@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>HAGALUO - Toko Furniture & Perlengkapan Rumah</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <a href="/" class="logo">HAGALUO</a>
+            <div class="search-bar-container">
+                <form action="/" method="GET">
+                    <input type="text" name="q" placeholder="Cari furniture, rak, kursi..." value="{{ pencarian }}">
+                    <button type="submit">Cari</button>
+                </form>
+            </div>
+            <a href="#" class="cart-link">🛒 Keranjang</a>
+        </div>
+    </header>
+
+    <div class="hero-banner">
+        <h1>Koleksi Furniture Terbaik untuk Hunian Nyaman</h1>
+        <p>Temukan berbagai pilihan perabot rumah tangga berkualitas tinggi dengan harga spesial.</p>
+    </div>
+
+    <div class="container">
+        <h2>Produk Unggulan</h2>
+        
+        {% if produk_list %}
+            <div class="product-grid">
+                {% for p in produk_list %}
+                    <div class="product-card">
+                        <img src="{{ p.gambar }}" alt="{{ p.nama }}">
+                        <div class="product-info">
+                            <h3><a href="/detail/{{ p.id }}">{{ p.nama }}</a></h3>
+                            <div class="price">{{ p.harga }}</div>
+                            <a href="/detail/{{ p.id }}" class="btn-detail">Lihat Detail</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>Maaf, produk yang kamu cari tidak ditemukan.</p>
+        {% endif %}
+    </div>
+
+</body>
+</html>
